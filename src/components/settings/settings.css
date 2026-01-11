@@ -1,0 +1,29 @@
+
+.setting{
+    width: 1700px; 
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.setting-window{
+    width: 25%;
+    height: 90%;
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+}
+.setting-window-btn{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    cursor: pointer;
+}
