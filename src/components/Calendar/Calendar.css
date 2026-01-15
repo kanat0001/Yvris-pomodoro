@@ -50,6 +50,24 @@
   border-radius: 3px;
 }
 
+.day-cell.green {
+  background-color: #3cb371;
+  color: white;
+}
+
+.day-cell.red {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.day-cell.today {
+  border: 2px solid #000;
+}
+
+.day-cell.selected {
+  outline: 2px solid #000;
+}
+
 
 
 

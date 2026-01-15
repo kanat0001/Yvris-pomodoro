@@ -9,8 +9,8 @@ export default function Calendar() {
   const setSelectedDay = useCalendarStore(s => s.setSelectedDay);
   const initDays = useCalendarStore(s => s.initDays);
   const loadDays = useCalendarStore(s => s.loadMonth);
+  const statusSwitch = useCalendarStore(s => s.statusSwitch);
 
-  const currentDate = dayjs();
   const today = dayjs();
 
   useEffect(() => {
@@ -22,28 +22,33 @@ export default function Calendar() {
 
   return (
     <div>
+      {/* Шапка с днями недели */}
       <div className="calendar-grid week">
         {['пн','вт','ср','чт','пт','сб','вс'].map(day => (
           <span key={day}>{day}</span>
         ))}
       </div>
 
+      {/* Сетка дней */}
       <div className="calendar-grid">
         {days.map((dayObj, i) => {
           if (!dayObj) return <div key={i} className="empty-cell" />;
 
+          // Проверяем, сегодняшний ли день
           const isToday =
             dayObj.dayNumber === today.date() &&
-            currentDate.month() === today.month() &&
-            currentDate.year() === today.year();
+            today.month() === today.month() &&
+            today.year() === today.year();
 
           return (
             <div
               key={i}
-              className={`day-cell 
+              className={`
+                day-cell 
                 ${isToday ? 'today' : ''} 
                 ${dayObj.dayNumber === selectedDay ? 'selected' : ''} 
-                ${dayObj.status}`}
+                ${statusSwitch(dayObj)}
+              `}
               onClick={() => setSelectedDay(dayObj.dayNumber)}
             >
               <div className="day-number">{dayObj.dayNumber}</div>
