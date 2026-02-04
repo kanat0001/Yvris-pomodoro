@@ -10,7 +10,7 @@ interface SettingProps {
     setBreakDuration:  React.Dispatch<React.SetStateAction<number>>;
 }
 
-export default function Setting ({className, duration, setDuration, workDuration, breakDuration, setWorkDuration, setBreakDuration} : SettingProps) {
+export default function Setting ({setDuration, workDuration, breakDuration, setWorkDuration, setBreakDuration} : SettingProps) {
     const [isOpen, setIsOpen] = useState(false)
     const switchBtn = () => {
         setIsOpen((prev) => !prev)

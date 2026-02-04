@@ -1,5 +1,3 @@
-// ✅ Calendar.tsx (полный файл) — тут только фикс isToday + запрет клика по прошлым дням
-
 import { useEffect } from "react";
 import { useCalendarStore } from "../../store/useCalendarStore";
 import dayjs from "dayjs";

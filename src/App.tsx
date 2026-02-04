@@ -6,7 +6,7 @@ import Calendar from "./components/Calendar/Calendar";
 import StatisticsDay from "./components/statisticsDay/statisticsDay";
 import Statistics from "./components/statistics/statistics";
 import { db } from "./firebase";
-import { doc, setDoc, updateDoc, increment, getDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import { useCalendarStore } from "./store/useCalendarStore";
 
 function App() {
@@ -17,6 +17,7 @@ function App() {
 
   const [duration, setDuration] = useState(25);
   const [totalMinutes, setTotalMinutes] = useState<number>(0);
+  void totalMinutes;
   const [workDuration, setWorkDuration] = useState(25)
   const [breakDuration, setBreakDuration] = useState(5)
 
