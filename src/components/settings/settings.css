@@ -1,6 +1,6 @@
 
 .setting{
-    width: 1700px; 
+    max-width: 100%; 
     display: flex;
     justify-content: end;
     align-items: center;

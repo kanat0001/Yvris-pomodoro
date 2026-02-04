@@ -1,143 +1,165 @@
+/* Calendar.css */
+
+/* можно убрать, если у тебя уже есть общий фон */
+.calendar {
+  padding: 10px;
+}
+
+/* сетка */
 .calendar-grid {
   display: grid;
-  grid-template-columns: repeat(7, 70px);
-  gap: 5px;
+  grid-template-columns: repeat(7, 60px);
+  gap: 8px;
+  justify-content: center;
   margin-bottom: 10px;
+}
 
+.week .week-day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  font-size: 13px;
+  letter-spacing: 0.2px;
+  opacity: 0.85;
 }
-.week span{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.day-cell, .empty-cell {
+
+/* ячейки */
+.day-cell,
+.empty-cell {
   width: 60px;
+  
   min-height: 50px;
+  border-radius: 14px;
+  box-sizing: border-box;
+}
+
+/* пустые */
+.empty-cell {
+  background: transparent;
+  border: 1px solid transparent;
+}
+
+/* стиль "glass card" + анимации */
+.day-cell {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 2px;
-  box-sizing: border-box;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+
+  padding: 6px 6px 8px;
+  position: relative;
+  overflow: hidden;
+
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease,
+    filter 160ms ease, opacity 160ms ease;
 }
 
-.empty-cell {
-  background: white;
-  border: 1px solid transparent;
-  cursor: default;
+.day-cell:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.25);
+  border-color: rgba(255, 255, 255, 0.28);
 }
 
-.day-cell.today {
-  border: 2px solid rgb(93, 150, 7);
+.day-cell:active {
+  transform: translateY(0px) scale(0.98);
 }
 
-.day-cell.selected {
-  border: #6F7F8C 2px solid; 
-}
-
+/* номер дня */
 .day-number {
-  font-weight: bold;
-  margin-bottom: 2px;
+  width: 100%;
+  text-align: left;
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 6px;
+  opacity: 0.95;
 }
 
-.task {
-  font-size: 12px;
-  background: #eee;
-  margin: 1px 0;
-  padding: 2px 4px;
-  border-radius: 3px;
+/* мини-прогресс-полоска */
+.day-minutes {
+  width: 82%;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.28);
+  margin-top: auto;
+  overflow: hidden;
+  position: relative;
 }
 
+.day-minutes::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 60%;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+}
+
+/* ====== СТАТУСЫ (градиент + "shine") ====== */
 .day-cell.green {
-  background-color: #3cb371;
   color: white;
+  background: linear-gradient(135deg, #1e944f, #198b49);
+}
+
+.day-cell.yellow {
+  color: #1b1b1b;
+  background: linear-gradient(135deg, #f1c40f, #f39c12);
 }
 
 .day-cell.red {
-  background-color: #e74c3c;
+  color: white;
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+}
+.day-cell.violet {
+  background: linear-gradient(135deg, #9427be, #4b095c);
   color: white;
 }
 
+
+/* shine-эффект на статусных */
+.day-cell.green::before,
+.day-cell.yellow::before,
+.day-cell.red::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(
+    circle at 30% 20%,
+    rgba(255, 255, 255, 0.35),
+    transparent 45%
+  );
+  transform: rotate(15deg);
+  pointer-events: none;
+}
+
+/* today / selected — аккуратный glow (НЕ чёрная рамка) */
 .day-cell.today {
-  border: 2px solid #000;
+  outline: 2px solid rgba(255, 255, 255, 0.55);
+  box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.25), 0 10px 26px rgba(0, 0, 0, 0.25);
 }
 
 .day-cell.selected {
-  outline: 2px solid #000;
+  outline: 2px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.28), 0 10px 26px rgba(0, 0, 0, 0.25);
 }
 
+/* disabled — реально запрещённые */
+.day-cell.disabled {
+  filter: grayscale(0.2);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-.calendar {
-  width: 320px;
-  margin: 40px auto;
-  text-align: center;
-  font-family: Arial, sans-serif;
-  color: black;
 }
 
-.calendar-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
+.day-cell.disabled:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: rgba(255, 255, 255, 0.18);
 }
-
-.calendar-header h2 {
-  font-size: 1.2rem;
-  text-transform: capitalize;
-}
-
-.calendar-header button {
-  border: none;
-  background-color: #e5e5e5;
-  padding: 6px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.calendar-header button:hover {
-  background-color: #d0d0d0;
-}
-
-.calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 4px;
-}
-
-.day-name {
-  font-weight: bold;
-  color: #333;
-}
-
-.day-cell {
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #f2f2f2;
-  border-radius: 6px;
-}
-
-.today {
-  background-color: #4a90e2;
-  color: white;
-  font-weight: bold;
-} 

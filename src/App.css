@@ -12,8 +12,13 @@ html, body, #root {
     height: 100%;
     margin: 0;
     padding: 0;
-    background-color: #3c3647;
-    color: #ffffff ;
+    background-color: #FAFAFA;
+    color: #0F0F0F ;
+}
+.wrapper{
+  max-width: 1560px;
+  margin: 0 auto;
+
 }
 
 .parent {
@@ -22,6 +27,7 @@ html, body, #root {
   grid-template-rows: 50px 1fr; 
   gap: 0;
   height: 100%;
+  margin: 0 30px;
 }
 
 .setting {

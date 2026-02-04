@@ -4,6 +4,7 @@ import Pomodoro from './components/pomodoro/pomodoro';
 import Setting from './components/settings/settings';
 import Calendar from "./components/Calendar/Calendar";
 import StatisticsDay from "./components/statisticsDay/statisticsDay";
+import Statistics from "./components/statistics/statistics";
 import { db } from "./firebase";
 import { doc, setDoc, updateDoc, increment, getDoc } from "firebase/firestore";
 import { useCalendarStore } from "./store/useCalendarStore";
@@ -19,8 +20,9 @@ function App() {
   const [workDuration, setWorkDuration] = useState(25)
   const [breakDuration, setBreakDuration] = useState(5)
 
-  const getTotalMinutses = useCalendarStore(s => s.getTotalMinutes())
-  const getTodayMinutes = useCalendarStore(s => s.getTodayMinutes())
+
+
+
 
 
   // Загружаем totalMinutes при монтировании
@@ -46,7 +48,8 @@ function App() {
 
   return (
     <div className="app">
-      <div className="parent">
+      <div className="wrapper">
+        <div className="parent">
         <Setting className="setting"
         duration={duration} 
         setDuration={setDuration} 
@@ -55,8 +58,7 @@ function App() {
         setWorkDuration={setWorkDuration}
         setBreakDuration={setBreakDuration} />
         <div className="statistics">
-          <h1>всего минут: {getTotalMinutses}</h1>
-          <h1>минут в день: {getTodayMinutes}</h1>
+          <Statistics/>
         </div>
         <div className="pomodoro">
           <Pomodoro
@@ -72,6 +74,8 @@ function App() {
 
         />
       </div>
+      </div>
+      
     </div>
   );
 }
